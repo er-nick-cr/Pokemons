@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Pokemons</string>
+    <string name="welcome">Welcome to our MORTAL arena! If you\'re not scared, please, come in!</string>
+    <string name="your_name">Your Name</string>
+    <string name="enter_arena">Let\'s fight!</string>
+    <string name="name_error">That\'s no good.</string>
+</resources>

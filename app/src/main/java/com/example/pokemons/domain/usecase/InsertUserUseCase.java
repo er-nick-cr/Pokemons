@@ -1,8 +1,8 @@
 package com.example.pokemons.domain.usecase;
 
-import com.example.pokemons.domain.entity.User;
+import io.reactivex.Completable;
 
 public interface InsertUserUseCase {
 
-    void insertUser (User user);
+    Completable insertUser (String name);
 }

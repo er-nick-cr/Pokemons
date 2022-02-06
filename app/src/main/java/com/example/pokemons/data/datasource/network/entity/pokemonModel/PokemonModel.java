@@ -1,5 +1,5 @@
 
-package com.example.pokemons.data.datasource.network.pokemonModel;
+package com.example.pokemons.data.datasource.network.entity.pokemonModel;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
@@ -7,30 +7,30 @@ import com.google.gson.annotations.SerializedName;
 
 public class PokemonModel {
 
-    @SerializedName("forms")
+    @SerializedName("name")
     @Expose
-    private List<Form> forms = null;
-    @SerializedName("id")
+    private String name;
+    @SerializedName("sprites")
     @Expose
-    private int id;
+    private Sprites sprites;
     @SerializedName("stats")
     @Expose
     private List<Stat> stats = null;
 
-    public List<Form> getForms() {
-        return forms;
+    public String getName() {
+        return name;
     }
 
-    public void setForms(List<Form> forms) {
-        this.forms = forms;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public Sprites getSprites() {
+        return sprites;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSprites(Sprites sprites) {
+        this.sprites = sprites;
     }
 
     public List<Stat> getStats() {
@@ -45,13 +45,13 @@ public class PokemonModel {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(PokemonModel.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("forms");
+        sb.append("name");
         sb.append('=');
-        sb.append(((this.forms == null)?"<null>":this.forms));
+        sb.append(((this.name == null)?"<null>":this.name));
         sb.append(',');
-        sb.append("id");
+        sb.append("sprites");
         sb.append('=');
-        sb.append(this.id);
+        sb.append(((this.sprites == null)?"<null>":this.sprites));
         sb.append(',');
         sb.append("stats");
         sb.append('=');
@@ -68,9 +68,9 @@ public class PokemonModel {
     @Override
     public int hashCode() {
         int result = 1;
-        result = ((result* 31)+ this.id);
+        result = ((result* 31)+((this.name == null)? 0 :this.name.hashCode()));
+        result = ((result* 31)+((this.sprites == null)? 0 :this.sprites.hashCode()));
         result = ((result* 31)+((this.stats == null)? 0 :this.stats.hashCode()));
-        result = ((result* 31)+((this.forms == null)? 0 :this.forms.hashCode()));
         return result;
     }
 
@@ -83,7 +83,7 @@ public class PokemonModel {
             return false;
         }
         PokemonModel rhs = ((PokemonModel) other);
-        return (((this.id == rhs.id)&&((this.stats == rhs.stats)||((this.stats!= null)&&this.stats.equals(rhs.stats))))&&((this.forms == rhs.forms)||((this.forms!= null)&&this.forms.equals(rhs.forms))));
+        return ((((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.sprites == rhs.sprites)||((this.sprites!= null)&&this.sprites.equals(rhs.sprites))))&&((this.stats == rhs.stats)||((this.stats!= null)&&this.stats.equals(rhs.stats))));
     }
 
 }

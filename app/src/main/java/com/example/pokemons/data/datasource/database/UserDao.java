@@ -5,13 +5,28 @@ import static androidx.room.OnConflictStrategy.REPLACE;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
+
+import com.example.pokemons.data.datasource.database.entity.UserDbModel;
+
+import io.reactivex.Completable;
+import io.reactivex.Single;
 
 @Dao
-public interface UserDao {
+public abstract class UserDao {
+
+    @Query("SELECT * FROM UserDbModel")
+    public abstract Single<UserDbModel> getUser();
 
     @Insert(onConflict = REPLACE)
-    void insertUser(UserDataModel user);
+    abstract public void insertUser(UserDbModel user);
 
-    @Query("SELECT * FROM UserDataModel")
-    UserDataModel getUser();
+    @Query("DELETE FROM UserDbModel")
+    abstract public void nukeTable();
+
+    @Transaction
+    public void clearAndInsert(UserDbModel userDbModel) {
+        nukeTable();
+        insertUser(userDbModel);
+    }
 }

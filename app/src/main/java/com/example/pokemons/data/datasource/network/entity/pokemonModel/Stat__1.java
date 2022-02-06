@@ -1,10 +1,10 @@
 
-package com.example.pokemons.data.datasource.network.pokemonPhoto;
+package com.example.pokemons.data.datasource.network.entity.pokemonModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VersionGroup {
+public class Stat__1 {
 
     @SerializedName("name")
     @Expose
@@ -32,7 +32,7 @@ public class VersionGroup {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(VersionGroup.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(Stat__1 .class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("name");
         sb.append('=');
         sb.append(((this.name == null)?"<null>":this.name));
@@ -62,10 +62,10 @@ public class VersionGroup {
         if (other == this) {
             return true;
         }
-        if ((other instanceof VersionGroup) == false) {
+        if ((other instanceof Stat__1) == false) {
             return false;
         }
-        VersionGroup rhs = ((VersionGroup) other);
+        Stat__1 rhs = ((Stat__1) other);
         return (((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
     }
 

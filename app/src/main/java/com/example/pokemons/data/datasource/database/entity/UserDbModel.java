@@ -1,25 +1,26 @@
-package com.example.pokemons.data.datasource.database;
+package com.example.pokemons.data.datasource.database.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.pokemons.domain.entity.Pokemon;
-
 import javax.inject.Inject;
 
 @Entity
-public class UserDataModel {
+public class UserDbModel {
 
-    @PrimaryKey @NonNull @ColumnInfo(name = "user")
-    private String name;
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "user")
+    private final String name;
 
     @Inject
-    public UserDataModel(String name) {
+    public UserDbModel(@NonNull String name) {
         this.name = name;
     }
 
+    @NonNull
     public String getName() {
         return name;
     }

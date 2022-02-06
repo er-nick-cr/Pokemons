@@ -1,23 +1,20 @@
 package com.example.pokemons.presentation.welcome;
 
+import android.text.TextUtils;
+
 import com.example.pokemons.domain.entity.User;
 import com.example.pokemons.domain.usecase.GetUserUseCase;
 import com.example.pokemons.domain.usecase.InsertUserUseCase;
+import com.example.pokemons.presentation.base.Presenter;
 
 import javax.inject.Inject;
 
-public class WelcomePresenter {
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
-    private WelcomeView view;
-    private InsertUserUseCase insertUserUseCase;
+public class WelcomePresenter extends Presenter<WelcomeView> {
 
-    public void attachView(WelcomeView view) {
-        this.view = view;
-    }
-
-    public void detachView() {
-        this.view = null;
-    }
+    private final InsertUserUseCase insertUserUseCase;
 
     @Inject
     public WelcomePresenter(InsertUserUseCase insertUserUseCase) {
@@ -25,11 +22,13 @@ public class WelcomePresenter {
     }
 
     public void onEnterButtonClick(String inputValue) {
-        if(inputValue.trim().equals("")) {
+        if(TextUtils.isEmpty(inputValue.trim())) {
             view.showEmptyNameFieldError();
         } else {
-            insertUserUseCase.insertUser(new User(inputValue));
-            view.moveToMenuScreen();
+            insertUserUseCase.insertUser(inputValue)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(() -> view.moveToMenuScreen());
         }
     }
 }

@@ -1,11 +1,12 @@
 package com.example.pokemons.domain.repository;
 
 import com.example.pokemons.domain.entity.Pokemon;
-import com.example.pokemons.domain.entity.User;
 
-import io.reactivex.rxjava3.core.Single;
+import java.util.List;
+
+import io.reactivex.Single;
 
 public interface PokemonRepository {
 
-    Single<Pokemon> getPokemon(String id);
+    Single<List<Pokemon>> getRandomPokemons(int count);
 }

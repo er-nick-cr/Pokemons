@@ -7,6 +7,8 @@ import com.example.pokemons.domain.repository.UserRepository;
 
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
+
 public class InsertUserUseCaseImpl implements InsertUserUseCase {
 
     @NonNull
@@ -18,7 +20,7 @@ public class InsertUserUseCaseImpl implements InsertUserUseCase {
     }
 
     @Override
-    public void insertUser(User user) {
-        userRepository.insertUser(user);
+    public Completable insertUser(String name) {
+       return userRepository.insertUser(new User(name));
     }
 }

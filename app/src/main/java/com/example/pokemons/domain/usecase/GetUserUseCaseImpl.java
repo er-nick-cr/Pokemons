@@ -7,6 +7,8 @@ import com.example.pokemons.domain.repository.UserRepository;
 
 import javax.inject.Inject;
 
+import io.reactivex.Single;
+
 public class GetUserUseCaseImpl implements GetUserUseCase {
 
     @NonNull
@@ -18,7 +20,7 @@ public class GetUserUseCaseImpl implements GetUserUseCase {
     }
 
     @Override
-    public User getUser() {
+    public Single<User> getUser() {
         return userRepository.getUser();
     }
 }

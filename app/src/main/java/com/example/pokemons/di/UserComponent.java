@@ -8,7 +8,7 @@ import com.example.pokemons.presentation.welcome.WelcomeActivity;
 import dagger.BindsInstance;
 import dagger.Component;
 
-@Component(modules = {UserModule.class})
+@Component(modules = {UserModule.class, PokemonModule.class})
 public interface UserComponent {
 
     void inject(WelcomeActivity welcomeActivity);

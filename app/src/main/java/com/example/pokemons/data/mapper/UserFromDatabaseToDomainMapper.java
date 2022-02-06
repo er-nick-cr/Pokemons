@@ -1,11 +1,11 @@
 package com.example.pokemons.data.mapper;
 
-import androidx.room.Insert;
-
-import com.example.pokemons.data.datasource.database.UserDataModel;
+import com.example.pokemons.data.datasource.database.entity.UserDbModel;
 import com.example.pokemons.domain.entity.User;
 
 import javax.inject.Inject;
+
+import io.reactivex.Single;
 
 public class UserFromDatabaseToDomainMapper {
 
@@ -14,7 +14,7 @@ public class UserFromDatabaseToDomainMapper {
 
     }
 
-    public User map(UserDataModel userDataModel) {
-        return new User(userDataModel.getName());
+    public User map(UserDbModel userDBModel) {
+        return new User(userDBModel.getName());
     }
 }

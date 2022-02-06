@@ -1,5 +1,5 @@
 
-package com.example.pokemons.data.datasource.network.pokemonModel;
+package com.example.pokemons.data.datasource.network.entity.pokemonModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

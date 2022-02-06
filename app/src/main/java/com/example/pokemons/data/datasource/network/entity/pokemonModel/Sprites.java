@@ -1,5 +1,5 @@
 
-package com.example.pokemons.data.datasource.network.pokemonPhoto;
+package com.example.pokemons.data.datasource.network.entity.pokemonModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -30,6 +30,9 @@ public class Sprites {
     @SerializedName("front_shiny_female")
     @Expose
     private Object frontShinyFemale;
+    @SerializedName("other")
+    @Expose
+    private Other other;
 
     public String getBackDefault() {
         return backDefault;
@@ -95,6 +98,14 @@ public class Sprites {
         this.frontShinyFemale = frontShinyFemale;
     }
 
+    public Other getOther() {
+        return other;
+    }
+
+    public void setOther(Other other) {
+        this.other = other;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -131,6 +142,10 @@ public class Sprites {
         sb.append('=');
         sb.append(((this.frontShinyFemale == null)?"<null>":this.frontShinyFemale));
         sb.append(',');
+        sb.append("other");
+        sb.append('=');
+        sb.append(((this.other == null)?"<null>":this.other));
+        sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
         } else {
@@ -143,6 +158,7 @@ public class Sprites {
     public int hashCode() {
         int result = 1;
         result = ((result* 31)+((this.frontShinyFemale == null)? 0 :this.frontShinyFemale.hashCode()));
+        result = ((result* 31)+((this.other == null)? 0 :this.other.hashCode()));
         result = ((result* 31)+((this.backFemale == null)? 0 :this.backFemale.hashCode()));
         result = ((result* 31)+((this.frontShiny == null)? 0 :this.frontShiny.hashCode()));
         result = ((result* 31)+((this.backDefault == null)? 0 :this.backDefault.hashCode()));
@@ -162,7 +178,7 @@ public class Sprites {
             return false;
         }
         Sprites rhs = ((Sprites) other);
-        return (((((((((this.frontShinyFemale == rhs.frontShinyFemale)||((this.frontShinyFemale!= null)&&this.frontShinyFemale.equals(rhs.frontShinyFemale)))&&((this.backFemale == rhs.backFemale)||((this.backFemale!= null)&&this.backFemale.equals(rhs.backFemale))))&&((this.frontShiny == rhs.frontShiny)||((this.frontShiny!= null)&&this.frontShiny.equals(rhs.frontShiny))))&&((this.backDefault == rhs.backDefault)||((this.backDefault!= null)&&this.backDefault.equals(rhs.backDefault))))&&((this.frontDefault == rhs.frontDefault)||((this.frontDefault!= null)&&this.frontDefault.equals(rhs.frontDefault))))&&((this.frontFemale == rhs.frontFemale)||((this.frontFemale!= null)&&this.frontFemale.equals(rhs.frontFemale))))&&((this.backShinyFemale == rhs.backShinyFemale)||((this.backShinyFemale!= null)&&this.backShinyFemale.equals(rhs.backShinyFemale))))&&((this.backShiny == rhs.backShiny)||((this.backShiny!= null)&&this.backShiny.equals(rhs.backShiny))));
+        return ((((((((((this.frontShinyFemale == rhs.frontShinyFemale)||((this.frontShinyFemale!= null)&&this.frontShinyFemale.equals(rhs.frontShinyFemale)))&&((this.other == rhs.other)||((this.other!= null)&&this.other.equals(rhs.other))))&&((this.backFemale == rhs.backFemale)||((this.backFemale!= null)&&this.backFemale.equals(rhs.backFemale))))&&((this.frontShiny == rhs.frontShiny)||((this.frontShiny!= null)&&this.frontShiny.equals(rhs.frontShiny))))&&((this.backDefault == rhs.backDefault)||((this.backDefault!= null)&&this.backDefault.equals(rhs.backDefault))))&&((this.frontDefault == rhs.frontDefault)||((this.frontDefault!= null)&&this.frontDefault.equals(rhs.frontDefault))))&&((this.frontFemale == rhs.frontFemale)||((this.frontFemale!= null)&&this.frontFemale.equals(rhs.frontFemale))))&&((this.backShinyFemale == rhs.backShinyFemale)||((this.backShinyFemale!= null)&&this.backShinyFemale.equals(rhs.backShinyFemale))))&&((this.backShiny == rhs.backShiny)||((this.backShiny!= null)&&this.backShiny.equals(rhs.backShiny))));
     }
 
 }

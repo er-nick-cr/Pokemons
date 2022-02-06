@@ -1,18 +1,22 @@
 package com.example.pokemons.data.datasource.network;
 
-import com.example.pokemons.data.datasource.network.pokemonModel.PokemonModel;
+import com.example.pokemons.data.datasource.network.entity.pokemonModel.PokemonModel;
 
-import io.reactivex.rxjava3.core.Single;
+import javax.inject.Inject;
+
+import io.reactivex.Single;
 
 public class NetworkPokemonDataSource {
 
-    private final PokemonApi api;
+    private final NetworkService networkService;
 
-    public NetworkPokemonDataSource(PokemonApi api) {
-        this.api = api;
+    @Inject
+    public NetworkPokemonDataSource(NetworkService networkService) {
+
+        this.networkService = networkService;
     }
 
-    public Single<PokemonModel> getPokemon(String id) {
-        return api.getPokemon(id);
+    public Single<PokemonModel> getPokemon(int id) {
+        return networkService.getApi().getPokemon(id);
     }
 }

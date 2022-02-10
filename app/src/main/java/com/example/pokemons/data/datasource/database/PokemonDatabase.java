@@ -7,9 +7,10 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.pokemons.BuildConfig;
+import com.example.pokemons.data.datasource.database.entity.PokemonDbModel;
 import com.example.pokemons.data.datasource.database.entity.UserDbModel;
 
-@Database(entities = {UserDbModel.class}, version = 4)
+@Database(entities = {UserDbModel.class, PokemonDbModel.class}, version = 5)
 public abstract class PokemonDatabase extends RoomDatabase {
 
     private static PokemonDatabase db;
@@ -25,4 +26,5 @@ public abstract class PokemonDatabase extends RoomDatabase {
     }
 
     public abstract UserDao getUserDao();
+    public abstract PokemonDao getPokemonDao();
 }

@@ -9,7 +9,6 @@ import androidx.room.Transaction;
 
 import com.example.pokemons.data.datasource.database.entity.UserDbModel;
 
-import io.reactivex.Completable;
 import io.reactivex.Single;
 
 @Dao

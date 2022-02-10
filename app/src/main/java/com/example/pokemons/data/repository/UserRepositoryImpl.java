@@ -29,7 +29,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Single<User> getUser() {
-        return database.getUserDao().getUser().map((userDbModel) -> userFromDatabaseToDomainMapper.map(userDbModel));
+        return database.getUserDao().getUser().map(userFromDatabaseToDomainMapper::map);
     }
 
     public Completable insertUser(User user) {

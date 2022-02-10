@@ -2,7 +2,7 @@ package com.example.pokemons.presentation.menu.recycler;
 
 import com.example.pokemons.domain.entity.Pokemon;
 
-public interface ViewHolderAction {
+public interface OnItemClickListener {
 
-    void onPokemonClick (Pokemon pokemon, int position);
+    void onItemClick(int position);
 }

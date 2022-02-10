@@ -10,4 +10,5 @@ public interface MenuView {
     void showError();
     void showPokemonsList(List<Pokemon> pokemons);
     void showLoading(boolean isLoading);
+    void moveToMainMenuScreen();
 }

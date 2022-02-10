@@ -3,8 +3,10 @@ package com.example.pokemons.presentation.menu;
 import android.annotation.SuppressLint;
 
 import com.example.pokemons.BuildConfig;
+import com.example.pokemons.domain.entity.Pokemon;
 import com.example.pokemons.domain.usecase.GetRandomPokemonsUseCase;
 import com.example.pokemons.domain.usecase.GetUserUseCase;
+import com.example.pokemons.domain.usecase.InsertPokemonUseCase;
 import com.example.pokemons.presentation.base.Presenter;
 
 import javax.inject.Inject;
@@ -17,12 +19,19 @@ public class MenuPresenter extends Presenter<MenuView> {
 
     private final GetUserUseCase getUserUseCase;
     private final GetRandomPokemonsUseCase getRandomPokemonsUseCase;
+    private final InsertPokemonUseCase insertPokemonUseCase;
+    private Pokemon selectedPokemon;
     private final CompositeDisposable disposable = new CompositeDisposable();
 
     @Inject
-    public MenuPresenter(GetUserUseCase getUserUseCase, GetRandomPokemonsUseCase getRandomPokemonsUseCase) {
+    public MenuPresenter(
+            GetUserUseCase getUserUseCase,
+            GetRandomPokemonsUseCase getRandomPokemonsUseCase,
+            InsertPokemonUseCase insertPokemonUseCase
+    ) {
         this.getUserUseCase = getUserUseCase;
         this.getRandomPokemonsUseCase = getRandomPokemonsUseCase;
+        this.insertPokemonUseCase = insertPokemonUseCase;
     }
 
     @Override
@@ -61,5 +70,20 @@ public class MenuPresenter extends Presenter<MenuView> {
                                 (error) -> {
                                     view.showError();
                                 }));
+    }
+
+    public void setSelectedPokemon(Pokemon selectedPokemon) {
+        this.selectedPokemon = selectedPokemon;
+    }
+
+    public Pokemon getSelectedPokemon() {
+        return selectedPokemon;
+    }
+
+    public void onChoosePokemonButtonCLick() {
+        disposable.add(insertPokemonUseCase.insertPokemon(selectedPokemon)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> view.moveToMainMenuScreen()));
     }
 }

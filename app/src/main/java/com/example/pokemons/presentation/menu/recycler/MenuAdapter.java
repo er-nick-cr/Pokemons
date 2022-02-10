@@ -18,18 +18,24 @@ import java.util.List;
 public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
     private List<Pokemon> pokemons = Collections.emptyList();
+    private final ViewHolderAction viewHolderAction;
+    private Pokemon selectedPokemon;
+
+    public MenuAdapter(final @NonNull ViewHolderAction viewHolderAction) {
+        this.viewHolderAction = viewHolderAction;
+    }
 
     @NonNull
     @Override
     public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         final View view = inflater.inflate(R.layout.pokemon_item, parent, false);
-        return new MenuViewHolder(view);
+        return new MenuViewHolder(view, this::onItemClick);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
-        holder.bind(pokemons.get(position));
+        holder.bind(pokemons.get(position), selectedPokemon);
     }
 
     @Override
@@ -44,5 +50,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
         this.pokemons = pokemons;
         diffResult.dispatchUpdatesTo(this);
+    }
+
+    public void setSelectedPokemon(Pokemon pokemon) {
+        this.selectedPokemon = pokemon;
+    }
+
+    private void onItemClick(final int position) {
+       viewHolderAction.onPokemonClick(pokemons.get(position), position);
     }
 }

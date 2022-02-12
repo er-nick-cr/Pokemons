@@ -11,13 +11,16 @@ class MenuDiffCallback extends DiffUtil.Callback {
 
     private final List<Pokemon> oldList;
     private final List<Pokemon> newList;
+    private final Pokemon selectedPokemon;
 
     MenuDiffCallback(
             final @NonNull List<Pokemon> oldList,
-            final @NonNull List<Pokemon> newList
+            final @NonNull List<Pokemon> newList,
+            final Pokemon selectedPokemon
     ) {
         this.oldList = oldList;
         this.newList = newList;
+        this.selectedPokemon = selectedPokemon;
     }
 
     @Override
@@ -37,6 +40,6 @@ class MenuDiffCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-        return oldList.get(oldItemPosition).equals(newList.get(newItemPosition));
+        return oldList.get(oldItemPosition).getName().equals(selectedPokemon.getName());
     }
 }

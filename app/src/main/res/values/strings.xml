@@ -16,4 +16,7 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="your_character">Your character</string>
+    <string name="enter_to_mortal_arena">Enter to mortal arena</string>
+    <string name="change_account">Change account data</string>
 </resources>

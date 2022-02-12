@@ -20,6 +20,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     private List<Pokemon> pokemons = Collections.emptyList();
     private final ViewHolderAction viewHolderAction;
     private Pokemon selectedPokemon;
+    private int position;
 
     public MenuAdapter(final @NonNull ViewHolderAction viewHolderAction) {
         this.viewHolderAction = viewHolderAction;
@@ -45,9 +46,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
     @SuppressLint("NotifyDataSetChanged")
     public void setPokemons(final @NonNull List<Pokemon> pokemons) {
-        final MenuDiffCallback callback = new MenuDiffCallback(this.pokemons, pokemons);
+        final MenuDiffCallback callback = new MenuDiffCallback(this.pokemons, pokemons, selectedPokemon);
         final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(callback);
-
         this.pokemons = pokemons;
         diffResult.dispatchUpdatesTo(this);
     }
@@ -58,5 +58,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
     private void onItemClick(final int position) {
        viewHolderAction.onPokemonClick(pokemons.get(position), position);
+       notifyItemChanged(this.position);
+       notifyItemChanged(position);
+       this.position = position;
     }
 }

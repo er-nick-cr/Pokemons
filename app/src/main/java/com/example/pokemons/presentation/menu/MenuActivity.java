@@ -106,6 +106,5 @@ public class MenuActivity extends AppCompatActivity implements MenuView {
         adapter.setSelectedPokemon(menuPresenter.getSelectedPokemon());
         continueButton.setText("Continue with " + pokemon.getName());
         continueButton.setVisibility(View.VISIBLE);
-        adapter.notifyDataSetChanged();
     }
 }

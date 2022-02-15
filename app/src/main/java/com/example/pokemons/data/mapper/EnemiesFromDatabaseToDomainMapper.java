@@ -21,16 +21,16 @@ public class EnemiesFromDatabaseToDomainMapper {
 
     public List<Pokemon> map(List<EnemyDbModel> enemiesFromDatabase) {
         List<Pokemon> enemies = new ArrayList<>();
-        enemiesFromDatabase.forEach((enemyDbModel -> {
-            Pokemon pokemon = new Pokemon(enemyDbModel.getId(),
-                    enemyDbModel.getImageUrl(),
-                    enemyDbModel.getName(),
-                    enemyDbModel.getHealth(),
-                    enemyDbModel.getAttack(),
-                    enemyDbModel.getDefense(),
-                    enemyDbModel.getSpecialAttack());
+        for (int i = 0; i < enemiesFromDatabase.size(); i++) {
+            Pokemon pokemon = new Pokemon(enemiesFromDatabase.get(i).getId(),
+                    enemiesFromDatabase.get(i).getImageUrl(),
+                    enemiesFromDatabase.get(i).getName(),
+                    enemiesFromDatabase.get(i).getHealth(),
+                    enemiesFromDatabase.get(i).getAttack(),
+                    enemiesFromDatabase.get(i).getDefense(),
+                    enemiesFromDatabase.get(i).getSpecialAttack());
             enemies.add(pokemon);
-        }));
+        }
         return enemies;
     }
 }

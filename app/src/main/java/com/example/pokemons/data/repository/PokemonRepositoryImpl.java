@@ -40,7 +40,8 @@ public class PokemonRepositoryImpl implements PokemonRepository {
             PokemonFromDomainToDatabaseMapper pokemonFromDomainToDatabaseMapper,
             PokemonFromDatabaseToDomainMapper pokemonFromDatabaseToDomainMapper,
             EnemiesFromDatabaseToDomainMapper enemiesFromDatabaseToDomainMapper,
-            EnemiesFromNetworkToDatabaseMapper enemiesFromNetworkToDatabaseMapper) {
+            EnemiesFromNetworkToDatabaseMapper enemiesFromNetworkToDatabaseMapper
+    ) {
         this.database = database;
         this.networkPokemonDataSource = networkPokemonDataSource;
         this.pokemonsFromNetworkToDamainMapper = pokemonsFromNetworkToDamainMapper;
@@ -66,8 +67,12 @@ public class PokemonRepositoryImpl implements PokemonRepository {
     public Maybe<List<Pokemon>> getAllEnemies() {
         return database.getEnemyDao().getAllEnemy()
                 .map(enemiesFromDatabaseToDomainMapper::map)
-                .switchIfEmpty(getRandomPokemons(7))
-                .doOnSuccess((pokemons -> {database.getEnemyDao().saveEnemy(enemiesFromNetworkToDatabaseMapper.map(pokemons));}));
+                .switchIfEmpty(getRandomPokemons(7)
+                        .doOnSuccess((pokemons -> {
+                            database.getEnemyDao()
+                                    .saveEnemy(enemiesFromNetworkToDatabaseMapper.map(pokemons));
+                        })));
+
     }
 
     @Override
@@ -75,7 +80,7 @@ public class PokemonRepositoryImpl implements PokemonRepository {
         Random random = new Random();
         List<Maybe<Pokemon>> pokemonRequests = new ArrayList<>();
 
-        for(int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             int id = random.nextInt(800) + i;
             pokemonRequests.add(getPokemon(id));
         }

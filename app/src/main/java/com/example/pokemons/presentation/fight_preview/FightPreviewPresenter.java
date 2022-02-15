@@ -7,6 +7,8 @@ import com.example.pokemons.domain.usecase.GetEnemiesFromDatabaseUseCase;
 import com.example.pokemons.domain.usecase.GetPokemonFromDatabaseUseCase;
 import com.example.pokemons.presentation.base.Presenter;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.Maybe;
@@ -16,8 +18,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class FightPreviewPresenter extends Presenter<FightPreviewView> {
 
-    private GetPokemonFromDatabaseUseCase getPokemonFromDatabaseUseCase;
-    private GetEnemiesFromDatabaseUseCase getEnemiesFromDatabaseUseCase;
+    private final GetPokemonFromDatabaseUseCase getPokemonFromDatabaseUseCase;
+    private final GetEnemiesFromDatabaseUseCase getEnemiesFromDatabaseUseCase;
     private final CompositeDisposable disposable = new CompositeDisposable();
 
     @Override
@@ -37,26 +39,22 @@ public class FightPreviewPresenter extends Presenter<FightPreviewView> {
     public void loadFighters() {
         disposable.add(
                 Maybe.zip(loadPokemon(), loadEnemy(), (pokemon, enemy) -> new Pair<>(pokemon, enemy))
-                .subscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe((result) -> {
-                    view.showFighters(result.first, result.second);
-                },
-                        (error) -> {
-                    view.showError();
-                        })
+                        .subscribeOn(Schedulers.io())
+                        .subscribeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                (pokemonEnemyPair -> view.showFighters(pokemonEnemyPair.first, pokemonEnemyPair.second.get(0))),
+                                (error -> view.showError())
+                        )
         );
-
     }
 
     private Maybe<Pokemon> loadPokemon() {
-       return getPokemonFromDatabaseUseCase.getPokemon()
+        return getPokemonFromDatabaseUseCase.getPokemon()
                 .subscribeOn(Schedulers.io());
     }
 
-    private Maybe<Pokemon> loadEnemy() {
-       return getEnemiesFromDatabaseUseCase.getAllEnemies()
-                .subscribeOn(Schedulers.io())
-                .map((enemies) -> enemies.get(0));
+    private Maybe<List<Pokemon>> loadEnemy() {
+        return getEnemiesFromDatabaseUseCase.getAllEnemies()
+                .subscribeOn(Schedulers.io());
     }
 }

@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.pokemons.PokemonApplication;
 import com.example.pokemons.R;
 import com.example.pokemons.domain.entity.Pokemon;
+import com.example.pokemons.presentation.fight_preview.FightPreviewActivity;
 import com.example.pokemons.presentation.menu.MenuActivity;
 
 import javax.inject.Inject;
@@ -87,7 +88,7 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuView 
 
     @Override
     public void enterArena() {
-        Intent intent = new Intent(MainMenuActivity.this, MainMenuActivity.class);
+        Intent intent = new Intent(MainMenuActivity.this, FightPreviewActivity.class);
         startActivity(intent);
     }
 }

@@ -40,14 +40,15 @@ public class CheckPresenter extends Presenter<CheckView> {
 
     public void checkParams() {
         disposable.add(
-                Maybe.zip(loadUser(), loadPokemon(), (user, pokemon) -> new Pair<>(user, pokemon))
+                Maybe.zip(loadUser(), loadPokemon(), (user, pokemon) -> new Pair(user, pokemon))
                 .subscribeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess(v -> view.moveToMainMenuScreen())
-                .doOnError(e -> view.showError())
-                .doOnComplete()
+                .subscribe(
+                        (userPokemonPair -> view.moveToMainMenuScreen()),
+                        (error -> view.showError()),
+                        (() -> view.moveToWelcomeScreen())
+                ));
 
-        );
     }
 
     private Maybe<User> loadUser() {

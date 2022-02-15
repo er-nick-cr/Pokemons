@@ -40,5 +40,5 @@ public abstract class PokemonModule {
     public abstract GetPokemonFromDatabaseUseCase bindGetPokemonFromDatabaseUseCase(GetPokemonFromDatabaseUseCaseImpl impl);
 
     @Binds
-    public abstract GetEnemiesFromDatabaseUseCase bindGetEnemiesFromDatabaseUsecase(GetEnemiesFromDatabaseUseCaseImpl impl);
+    public abstract GetEnemiesFromDatabaseUseCase bindGetEnemiesFromDatabaseUseСase(GetEnemiesFromDatabaseUseCaseImpl impl);
 }

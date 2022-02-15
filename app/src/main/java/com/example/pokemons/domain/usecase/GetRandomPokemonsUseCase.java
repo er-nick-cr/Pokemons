@@ -8,5 +8,5 @@ import io.reactivex.Maybe;
 import io.reactivex.Observable;
 
 public interface GetRandomPokemonsUseCase {
-   Observable<List<Pokemon>> getRandomPokemons(int count);
+   Maybe<List<Pokemon>> getRandomPokemons(int count);
 }

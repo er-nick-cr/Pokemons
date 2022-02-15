@@ -14,7 +14,7 @@ public class Stat {
     private int effort;
     @SerializedName("stat")
     @Expose
-    private Stat__1 stat;
+    private StatName stat;
 
     public int getBaseStat() {
         return baseStat;
@@ -32,11 +32,11 @@ public class Stat {
         this.effort = effort;
     }
 
-    public Stat__1 getStat() {
+    public StatName getStat() {
         return stat;
     }
 
-    public void setStat(Stat__1 stat) {
+    public void setStat(StatName stat) {
         this.stat = stat;
     }
 

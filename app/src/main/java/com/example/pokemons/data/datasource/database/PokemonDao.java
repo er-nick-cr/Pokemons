@@ -9,13 +9,13 @@ import androidx.room.Transaction;
 
 import com.example.pokemons.data.datasource.database.entity.PokemonDbModel;
 
-import io.reactivex.Single;
+import io.reactivex.Maybe;
 
 @Dao
 public abstract class PokemonDao {
 
     @Query("SELECT * FROM PokemonDbModel")
-    public abstract Single<PokemonDbModel> getPokemon();
+    public abstract Maybe<PokemonDbModel> getPokemon();
 
     @Insert(onConflict = REPLACE)
     abstract public void insertPokemon(PokemonDbModel pokemonDbModel);

@@ -7,7 +7,7 @@ import com.example.pokemons.domain.repository.UserRepository;
 
 import javax.inject.Inject;
 
-import io.reactivex.Single;
+import io.reactivex.Maybe;
 
 public class GetUserUseCaseImpl implements GetUserUseCase {
 
@@ -20,7 +20,7 @@ public class GetUserUseCaseImpl implements GetUserUseCase {
     }
 
     @Override
-    public Single<User> getUser() {
+    public Maybe<User> getUser() {
         return userRepository.getUser();
     }
 }

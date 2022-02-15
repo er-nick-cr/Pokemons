@@ -4,7 +4,7 @@ import com.example.pokemons.data.datasource.network.entity.pokemonModel.PokemonM
 
 import javax.inject.Inject;
 
-import io.reactivex.Single;
+import io.reactivex.Maybe;
 
 public class NetworkPokemonDataSource {
 
@@ -16,7 +16,7 @@ public class NetworkPokemonDataSource {
         this.networkService = networkService;
     }
 
-    public Single<PokemonModel> getPokemon(int id) {
+    public Maybe<PokemonModel> getPokemon(int id) {
         return networkService.getApi().getPokemon(id);
     }
 }

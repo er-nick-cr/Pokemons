@@ -5,8 +5,6 @@ import com.example.pokemons.domain.entity.User;
 
 import javax.inject.Inject;
 
-import io.reactivex.Single;
-
 public class UserFromDatabaseToDomainMapper {
 
     @Inject

@@ -4,6 +4,8 @@ import static io.reactivex.annotations.SchedulerSupport.IO;
 
 import com.example.pokemons.data.datasource.database.PokemonDatabase;
 import com.example.pokemons.data.datasource.network.NetworkPokemonDataSource;
+import com.example.pokemons.data.mapper.EnemiesFromDatabaseToDomainMapper;
+import com.example.pokemons.data.mapper.EnemiesFromNetworkToDatabaseMapper;
 import com.example.pokemons.data.mapper.PokemonFromDatabaseToDomainMapper;
 import com.example.pokemons.data.mapper.PokemonFromDomainToDatabaseMapper;
 import com.example.pokemons.data.mapper.PokemonsFromNetworkToDamainMapper;
@@ -17,7 +19,7 @@ import java.util.Random;
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
-import io.reactivex.Single;
+import io.reactivex.Maybe;
 import io.reactivex.annotations.SchedulerSupport;
 import io.reactivex.schedulers.Schedulers;
 
@@ -28,18 +30,24 @@ public class PokemonRepositoryImpl implements PokemonRepository {
     private final PokemonsFromNetworkToDamainMapper pokemonsFromNetworkToDamainMapper;
     private final PokemonFromDomainToDatabaseMapper pokemonFromDomainToDatabaseMapper;
     private final PokemonFromDatabaseToDomainMapper pokemonFromDatabaseToDomainMapper;
+    private final EnemiesFromDatabaseToDomainMapper enemiesFromDatabaseToDomainMapper;
+    private final EnemiesFromNetworkToDatabaseMapper enemiesFromNetworkToDatabaseMapper;
 
     @Inject
     public PokemonRepositoryImpl(
             PokemonDatabase database, NetworkPokemonDataSource networkPokemonDataSource,
             PokemonsFromNetworkToDamainMapper pokemonsFromNetworkToDamainMapper,
             PokemonFromDomainToDatabaseMapper pokemonFromDomainToDatabaseMapper,
-            PokemonFromDatabaseToDomainMapper pokemonFromDatabaseToDomainMapper) {
+            PokemonFromDatabaseToDomainMapper pokemonFromDatabaseToDomainMapper,
+            EnemiesFromDatabaseToDomainMapper enemiesFromDatabaseToDomainMapper,
+            EnemiesFromNetworkToDatabaseMapper enemiesFromNetworkToDatabaseMapper) {
         this.database = database;
         this.networkPokemonDataSource = networkPokemonDataSource;
         this.pokemonsFromNetworkToDamainMapper = pokemonsFromNetworkToDamainMapper;
         this.pokemonFromDomainToDatabaseMapper = pokemonFromDomainToDatabaseMapper;
         this.pokemonFromDatabaseToDomainMapper = pokemonFromDatabaseToDomainMapper;
+        this.enemiesFromDatabaseToDomainMapper = enemiesFromDatabaseToDomainMapper;
+        this.enemiesFromNetworkToDatabaseMapper = enemiesFromNetworkToDatabaseMapper;
     }
 
     @Override
@@ -50,26 +58,35 @@ public class PokemonRepositoryImpl implements PokemonRepository {
     }
 
     @Override
-    public Single<Pokemon> getPokemonFromDatabase() {
+    public Maybe<Pokemon> getPokemonFromDatabase() {
         return database.getPokemonDao().getPokemon().map(pokemonFromDatabaseToDomainMapper::map);
     }
 
     @Override
-    public Single<List<Pokemon>> getRandomPokemons(int count) {
+    public Maybe<List<Pokemon>> getAllEnemies() {
+        return database.getEnemyDao().getAllEnemy()
+                .map(enemiesFromDatabaseToDomainMapper::map)
+                .switchIfEmpty(getRandomPokemons(7))
+                .doOnSuccess((pokemons -> {database.getEnemyDao().saveEnemy(enemiesFromNetworkToDatabaseMapper.map(pokemons));}));
+    }
+
+    @Override
+    public Maybe<List<Pokemon>> getRandomPokemons(int count) {
         Random random = new Random();
-        List<Single<Pokemon>> pokemonRequests = new ArrayList<>();
+        List<Maybe<Pokemon>> pokemonRequests = new ArrayList<>();
 
         for(int i = 0; i < count; i++) {
             int id = random.nextInt(800) + i;
             pokemonRequests.add(getPokemon(id));
         }
 
-        return Single.merge(pokemonRequests)
-                .toList();
+        return Maybe.merge(pokemonRequests)
+                .toList()
+                .toMaybe();
     }
 
     @SchedulerSupport(IO)
-    private Single<Pokemon> getPokemon(int id) {
+    private Maybe<Pokemon> getPokemon(int id) {
         return networkPokemonDataSource.getPokemon(id)
                 .map(pokemonsFromNetworkToDamainMapper::map)
                 .subscribeOn(Schedulers.io());

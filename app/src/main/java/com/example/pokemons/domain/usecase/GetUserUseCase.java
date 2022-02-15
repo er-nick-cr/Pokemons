@@ -2,9 +2,9 @@ package com.example.pokemons.domain.usecase;
 
 import com.example.pokemons.domain.entity.User;
 
-import io.reactivex.Single;
+import io.reactivex.Maybe;
 
 public interface GetUserUseCase {
 
-    public Single<User> getUser();
+    Maybe<User> getUser();
 }

@@ -3,21 +3,24 @@ package com.example.pokemons.domain.usecase;
 import com.example.pokemons.domain.entity.Pokemon;
 import com.example.pokemons.domain.repository.PokemonRepository;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.Maybe;
 
-public class GetPokemonFromDatabaseUseCaseImpl implements GetPokemonFromDatabaseUseCase {
+public class GetEnemiesFromDatabaseUseCaseImpl implements GetEnemiesFromDatabaseUseCase {
 
     private final PokemonRepository pokemonRepository;
 
     @Inject
-    public GetPokemonFromDatabaseUseCaseImpl(PokemonRepository pokemonRepository) {
+    public GetEnemiesFromDatabaseUseCaseImpl(PokemonRepository pokemonRepository) {
         this.pokemonRepository = pokemonRepository;
     }
 
+
     @Override
-    public Maybe<Pokemon> getPokemon() {
-        return pokemonRepository.getPokemonFromDatabase();
+    public Maybe<List<Pokemon>> getAllEnemies() {
+        return pokemonRepository.getAllEnemies();
     }
 }

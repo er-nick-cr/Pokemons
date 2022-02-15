@@ -6,6 +6,8 @@ import com.example.pokemons.data.datasource.database.PokemonDatabase;
 import com.example.pokemons.data.datasource.network.NetworkService;
 import com.example.pokemons.data.repository.PokemonRepositoryImpl;
 import com.example.pokemons.domain.repository.PokemonRepository;
+import com.example.pokemons.domain.usecase.GetEnemiesFromDatabaseUseCase;
+import com.example.pokemons.domain.usecase.GetEnemiesFromDatabaseUseCaseImpl;
 import com.example.pokemons.domain.usecase.GetPokemonFromDatabaseUseCase;
 import com.example.pokemons.domain.usecase.GetPokemonFromDatabaseUseCaseImpl;
 import com.example.pokemons.domain.usecase.GetRandomPokemonsUseCase;
@@ -36,4 +38,7 @@ public abstract class PokemonModule {
 
     @Binds
     public abstract GetPokemonFromDatabaseUseCase bindGetPokemonFromDatabaseUseCase(GetPokemonFromDatabaseUseCaseImpl impl);
+
+    @Binds
+    public abstract GetEnemiesFromDatabaseUseCase bindGetEnemiesFromDatabaseUsecase(GetEnemiesFromDatabaseUseCaseImpl impl);
 }

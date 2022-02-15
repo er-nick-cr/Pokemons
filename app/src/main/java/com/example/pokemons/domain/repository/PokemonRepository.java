@@ -1,18 +1,19 @@
 package com.example.pokemons.domain.repository;
 
-import com.example.pokemons.data.datasource.database.PokemonDao;
 import com.example.pokemons.domain.entity.Pokemon;
 
 import java.util.List;
 
 import io.reactivex.Completable;
-import io.reactivex.Single;
+import io.reactivex.Maybe;
 
 public interface PokemonRepository {
 
-    Single<List<Pokemon>> getRandomPokemons(int count);
+    Maybe<List<Pokemon>> getRandomPokemons(int count);
 
-    Single<Pokemon> getPokemonFromDatabase();
+    Maybe<Pokemon> getPokemonFromDatabase();
+
+    Maybe<List<Pokemon>> getAllEnemies();
 
     Completable insertPokemon(Pokemon pokemon);
 }

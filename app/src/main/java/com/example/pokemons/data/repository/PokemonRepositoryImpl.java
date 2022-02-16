@@ -2,6 +2,8 @@ package com.example.pokemons.data.repository;
 
 import static io.reactivex.annotations.SchedulerSupport.IO;
 
+import android.annotation.SuppressLint;
+
 import com.example.pokemons.data.datasource.database.PokemonDatabase;
 import com.example.pokemons.data.datasource.network.NetworkPokemonDataSource;
 import com.example.pokemons.data.mapper.EnemiesFromDatabaseToDomainMapper;
@@ -63,15 +65,22 @@ public class PokemonRepositoryImpl implements PokemonRepository {
         return database.getPokemonDao().getPokemon().map(pokemonFromDatabaseToDomainMapper::map);
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public Maybe<List<Pokemon>> getAllEnemies() {
         return database.getEnemyDao().getAllEnemy()
-                .map(enemiesFromDatabaseToDomainMapper::map)
-                .switchIfEmpty(getRandomPokemons(7)
-                        .doOnSuccess((pokemons -> {
-                            database.getEnemyDao()
-                                    .saveEnemy(enemiesFromNetworkToDatabaseMapper.map(pokemons));
-                        })));
+                .flatMap((enemies) -> {
+                    if (enemies.size() == 0) {
+                        return getRandomPokemons(7)
+                                .doOnSuccess((pokemons -> {
+                                    database.getEnemyDao()
+                                            .saveEnemy(enemiesFromNetworkToDatabaseMapper.map(pokemons));
+                                }));
+                    } else {
+                        return Maybe.just(enemiesFromDatabaseToDomainMapper.map(enemies));
+                    }
+                });
+
 
     }
 

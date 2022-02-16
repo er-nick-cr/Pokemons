@@ -2,14 +2,21 @@ package com.example.pokemons.presentation.fight_preview;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.pokemons.PokemonApplication;
 import com.example.pokemons.R;
 import com.example.pokemons.domain.entity.Pokemon;
+import com.example.pokemons.presentation.check.CheckActivity;
+import com.example.pokemons.presentation.fight.FightActivity;
+import com.example.pokemons.presentation.main_menu.MainMenuActivity;
+import com.example.pokemons.presentation.welcome.WelcomeActivity;
 
 import javax.inject.Inject;
 
@@ -44,6 +51,7 @@ public class FightPreviewActivity extends AppCompatActivity implements FightPrev
 
         fightPreviewPresenter.attachView(this);
         fightPreviewPresenter.loadFighters();
+        fightPreviewPresenter.startFight();
     }
 
     @Override
@@ -59,7 +67,14 @@ public class FightPreviewActivity extends AppCompatActivity implements FightPrev
     }
 
     @Override
-    public void showError() {
+    public void moveToFight() {
+        Handler handler = new Handler();
+        Intent intent = new Intent(FightPreviewActivity.this, FightActivity.class);
+        handler.postDelayed(() -> startActivity(intent), 3000);
+    }
 
+    @Override
+    public void showError() {
+        Toast.makeText(FightPreviewActivity.this, R.string.name_error, Toast.LENGTH_LONG).show();
     }
 }

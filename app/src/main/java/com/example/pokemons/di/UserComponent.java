@@ -3,6 +3,8 @@ package com.example.pokemons.di;
 import android.content.Context;
 
 import com.example.pokemons.presentation.check.CheckActivity;
+import com.example.pokemons.presentation.fight.FightActivity;
+import com.example.pokemons.presentation.fight.FightPresenter;
 import com.example.pokemons.presentation.fight_preview.FightPreviewActivity;
 import com.example.pokemons.presentation.fight_preview.FightPreviewPresenter;
 import com.example.pokemons.presentation.main_menu.MainMenuActivity;
@@ -24,6 +26,8 @@ public interface UserComponent {
     void inject(MainMenuActivity mainMenuActivity);
 
     void inject(FightPreviewActivity fightPreviewActivity);
+
+    void inject(FightActivity fightActivity);
 
     @Component.Factory
     interface Factory {

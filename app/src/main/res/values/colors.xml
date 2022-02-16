@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="backgroung_main_color">#42AAFF</color>
     <color name="text_color_main">#FFFF00</color>
+    <color name="fight_console_color">#4E5754</color>
+    <color name="progress_bar_color">#4E5754</color>
 </resources>

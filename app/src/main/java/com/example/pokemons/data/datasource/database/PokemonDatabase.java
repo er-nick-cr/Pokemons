@@ -11,7 +11,7 @@ import com.example.pokemons.data.datasource.database.entity.EnemyDbModel;
 import com.example.pokemons.data.datasource.database.entity.PokemonDbModel;
 import com.example.pokemons.data.datasource.database.entity.UserDbModel;
 
-@Database(entities = {UserDbModel.class, PokemonDbModel.class, EnemyDbModel.class}, version = 7)
+@Database(entities = {UserDbModel.class, PokemonDbModel.class, EnemyDbModel.class}, version = 8)
 public abstract class PokemonDatabase extends RoomDatabase {
 
     private static PokemonDatabase db;

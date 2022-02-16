@@ -5,5 +5,6 @@ import com.example.pokemons.domain.entity.Pokemon;
 public interface FightPreviewView {
 
     void showFighters(Pokemon pokemon, Pokemon enemy);
+    void moveToFight();
     void showError();
 }

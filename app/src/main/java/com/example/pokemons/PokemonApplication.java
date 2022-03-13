@@ -2,22 +2,22 @@ package com.example.pokemons;
 
 import android.app.Application;
 
-import com.example.pokemons.di.DaggerUserComponent;
-import com.example.pokemons.di.UserComponent;
+import com.example.pokemons.di.ApplicationComponent;
+import com.example.pokemons.di.DaggerApplicationComponent;
 
 public class PokemonApplication extends Application {
 
-    private UserComponent userComponent;
+    private ApplicationComponent userComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-       userComponent = DaggerUserComponent.factory()
+       userComponent = DaggerApplicationComponent.factory()
                 .create(this);
     }
 
-    public UserComponent getUserComponent() {
+    public ApplicationComponent getUserComponent() {
         return userComponent;
     }
 }

@@ -13,7 +13,7 @@ import dagger.BindsInstance;
 import dagger.Component;
 
 @Component(modules = {UserModule.class, PokemonModule.class})
-public interface UserComponent {
+public interface ApplicationComponent {
 
     void inject(CheckActivity checkActivity);
 
@@ -29,6 +29,6 @@ public interface UserComponent {
 
     @Component.Factory
     interface Factory {
-        UserComponent  create(@BindsInstance Context context);
+        ApplicationComponent create(@BindsInstance Context context);
     }
 }

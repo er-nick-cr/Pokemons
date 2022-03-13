@@ -9,6 +9,11 @@ public interface FightView {
     void setEnemyHealth(int currentHealth);
     int getPokemonHealth();
     void setPokemonHealth(int currentHealth);
-    void onEnemyAttack(Pokemon pokemon, Pokemon enemy);
+    void onEnemyAttack(Pokemon pokemon, Pokemon enemy, int isLastEnemy);
     void showError();
+    void moveToFightPreviewActivity();
+    void setPokemonWinner();
+    void setEnemyWinner();
+    void moveToMainMenuActivity();
+    void hideSpecialAttackButton();
 }

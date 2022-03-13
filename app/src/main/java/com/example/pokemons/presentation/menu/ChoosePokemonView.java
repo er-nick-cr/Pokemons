@@ -4,7 +4,7 @@ import com.example.pokemons.domain.entity.Pokemon;
 
 import java.util.List;
 
-public interface MenuView {
+public interface ChoosePokemonView {
 
     void setUserName(String name);
     void showError();

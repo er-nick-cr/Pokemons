@@ -1,4 +1,4 @@
-package com.example.pokemons.domain.usecase;
+package com.example.pokemons.domain.usecase.pokemon;
 
 import androidx.annotation.NonNull;
 

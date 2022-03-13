@@ -1,4 +1,4 @@
-package com.example.pokemons.domain.usecase;
+package com.example.pokemons.domain.usecase.pokemon;
 
 import com.example.pokemons.domain.entity.Pokemon;
 import com.example.pokemons.domain.repository.PokemonRepository;

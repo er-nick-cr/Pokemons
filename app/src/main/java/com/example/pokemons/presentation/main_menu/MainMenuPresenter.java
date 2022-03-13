@@ -2,8 +2,8 @@ package com.example.pokemons.presentation.main_menu;
 
 import android.annotation.SuppressLint;
 
-import com.example.pokemons.domain.usecase.GetPokemonFromDatabaseUseCase;
-import com.example.pokemons.domain.usecase.GetUserUseCase;
+import com.example.pokemons.domain.usecase.pokemon.GetPokemonFromDatabaseUseCase;
+import com.example.pokemons.domain.usecase.user.GetUserUseCase;
 import com.example.pokemons.presentation.base.Presenter;
 
 import javax.inject.Inject;
@@ -21,7 +21,6 @@ public class MainMenuPresenter extends Presenter<MainMenuView> {
     @Override
     public void detachView() {
         super.detachView();
-        disposable.clear();
     }
 
 
@@ -46,6 +45,10 @@ public class MainMenuPresenter extends Presenter<MainMenuView> {
                                 }));
     }
 
+    public void clearDisposable() {
+        disposable.clear();
+    }
+
     public void loadPokemon() {
         disposable.add(
                 getPokemonFromDatabaseUseCase.getPokemon()
@@ -58,6 +61,10 @@ public class MainMenuPresenter extends Presenter<MainMenuView> {
                             view.showError();
                         })
                 );
+    }
+
+    public void changeAccountData() {
+        view.moveToInsertNameActivity();
     }
 
     public void onEneterArenaButtonClick() {

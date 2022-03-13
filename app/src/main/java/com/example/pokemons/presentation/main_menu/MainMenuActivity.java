@@ -15,7 +15,7 @@ import com.example.pokemons.PokemonApplication;
 import com.example.pokemons.R;
 import com.example.pokemons.domain.entity.Pokemon;
 import com.example.pokemons.presentation.fight_preview.FightPreviewActivity;
-import com.example.pokemons.presentation.menu.MenuActivity;
+import com.example.pokemons.presentation.welcome.InsertNameActivity;
 
 import javax.inject.Inject;
 
@@ -31,6 +31,7 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuView 
     private TextView pokemonAttack;
     private TextView pokemonDefence;
     private TextView pokemonSpecialAttack;
+    private Button changeAccountData;
     private Button enterArenaButton;
 
     @Override
@@ -38,9 +39,13 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+
+
         PokemonApplication application = (PokemonApplication) getApplicationContext();
         application.getUserComponent()
                 .inject(this);
+
+        mainMenuPresenter.attachView(this);
 
         userName = findViewById(R.id.user_name_data);
         pokemonImage = findViewById(R.id.pokemon_image_selected);
@@ -49,18 +54,36 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuView 
         pokemonAttack = findViewById(R.id.pokemon_attack_selected);
         pokemonDefence = findViewById(R.id.pokemon_defence_selected);
         pokemonSpecialAttack = findViewById(R.id.pokemon_special_attack_selected);
+        changeAccountData = findViewById(R.id.change_account_button);
         enterArenaButton = findViewById(R.id.enter_arena_button);
+        enterArenaButton.setOnClickListener(v -> {
+            mainMenuPresenter.onEneterArenaButtonClick();
+        });
+        changeAccountData.setOnClickListener(v -> {
+            mainMenuPresenter.changeAccountData();
+        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        mainMenuPresenter.attachView(this);
+
         mainMenuPresenter.loadPokemon();
         mainMenuPresenter.loadUser();
-        enterArenaButton.setOnClickListener(v -> {
-            mainMenuPresenter.onEneterArenaButtonClick();
-        });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        mainMenuPresenter.clearDisposable();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        mainMenuPresenter.detachView();
     }
 
     @Override
@@ -79,6 +102,12 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuView 
         pokemonDefence.setText("Defence: " + pokemon.getDefense());
         pokemonAttack.setText("Attack:" + pokemon.getAttack());
         pokemonSpecialAttack.setText("Special Attack: " + pokemon.getSpecialAttack());
+    }
+
+    @Override
+    public void moveToInsertNameActivity() {
+        Intent intent = new Intent(MainMenuActivity.this, InsertNameActivity.class);
+        startActivity(intent);
     }
 
     @Override

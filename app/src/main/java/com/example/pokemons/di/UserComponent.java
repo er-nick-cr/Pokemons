@@ -4,12 +4,10 @@ import android.content.Context;
 
 import com.example.pokemons.presentation.check.CheckActivity;
 import com.example.pokemons.presentation.fight.FightActivity;
-import com.example.pokemons.presentation.fight.FightPresenter;
 import com.example.pokemons.presentation.fight_preview.FightPreviewActivity;
-import com.example.pokemons.presentation.fight_preview.FightPreviewPresenter;
 import com.example.pokemons.presentation.main_menu.MainMenuActivity;
-import com.example.pokemons.presentation.menu.MenuActivity;
-import com.example.pokemons.presentation.welcome.WelcomeActivity;
+import com.example.pokemons.presentation.menu.ChoosePokemonActivity;
+import com.example.pokemons.presentation.welcome.InsertNameActivity;
 
 import dagger.BindsInstance;
 import dagger.Component;
@@ -19,9 +17,9 @@ public interface UserComponent {
 
     void inject(CheckActivity checkActivity);
 
-    void inject(WelcomeActivity welcomeActivity);
+    void inject(InsertNameActivity insertNameActivity);
 
-    void inject(MenuActivity menuActivity);
+    void inject(ChoosePokemonActivity choosePokemonActivity);
 
     void inject(MainMenuActivity mainMenuActivity);
 

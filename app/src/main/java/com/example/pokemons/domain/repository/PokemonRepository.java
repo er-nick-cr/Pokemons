@@ -16,4 +16,6 @@ public interface PokemonRepository {
     Maybe<List<Pokemon>> getAllEnemies();
 
     Completable insertPokemon(Pokemon pokemon);
+
+    Completable deleteEnemy(int id);
 }

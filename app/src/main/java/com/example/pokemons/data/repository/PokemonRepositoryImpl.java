@@ -61,6 +61,13 @@ public class PokemonRepositoryImpl implements PokemonRepository {
     }
 
     @Override
+    public Completable deleteEnemy(int id) {
+        return Completable.fromAction(() -> {
+            database.getEnemyDao().deleteEnemy(id);
+        });
+    }
+
+    @Override
     public Maybe<Pokemon> getPokemonFromDatabase() {
         return database.getPokemonDao().getPokemon().map(pokemonFromDatabaseToDomainMapper::map);
     }

@@ -13,10 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.pokemons.PokemonApplication;
 import com.example.pokemons.R;
 import com.example.pokemons.domain.entity.Pokemon;
-import com.example.pokemons.presentation.check.CheckActivity;
 import com.example.pokemons.presentation.fight.FightActivity;
-import com.example.pokemons.presentation.main_menu.MainMenuActivity;
-import com.example.pokemons.presentation.welcome.WelcomeActivity;
 
 import javax.inject.Inject;
 
@@ -39,6 +36,8 @@ public class FightPreviewActivity extends AppCompatActivity implements FightPrev
         application.getUserComponent()
                 .inject(this);
 
+        fightPreviewPresenter.attachView(this);
+
         pokemonImage = findViewById(R.id.pokemon_image_fight_preview);
         enemyImage = findViewById(R.id.enemy_image_fight_preview);
         pokemonName = findViewById(R.id.pokemon_name_fight_preview);
@@ -49,9 +48,22 @@ public class FightPreviewActivity extends AppCompatActivity implements FightPrev
     protected void onStart() {
         super.onStart();
 
-        fightPreviewPresenter.attachView(this);
         fightPreviewPresenter.loadFighters();
         fightPreviewPresenter.startFight();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        fightPreviewPresenter.clearDisposable();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        fightPreviewPresenter.detachView();
     }
 
     @Override

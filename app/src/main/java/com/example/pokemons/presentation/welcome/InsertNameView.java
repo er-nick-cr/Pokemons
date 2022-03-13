@@ -1,7 +1,7 @@
 package com.example.pokemons.presentation.welcome;
 
-public interface WelcomeView {
+public interface InsertNameView {
 
     void showEmptyNameFieldError();
-    void moveToMenuScreen();
+    void moveToChoosePokemonScreen();
 }

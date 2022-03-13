@@ -3,8 +3,8 @@ package com.example.pokemons.presentation.fight_preview;
 import android.util.Pair;
 
 import com.example.pokemons.domain.entity.Pokemon;
-import com.example.pokemons.domain.usecase.GetEnemiesFromDatabaseUseCase;
-import com.example.pokemons.domain.usecase.GetPokemonFromDatabaseUseCase;
+import com.example.pokemons.domain.usecase.pokemon.GetEnemiesFromDatabaseUseCase;
+import com.example.pokemons.domain.usecase.pokemon.GetPokemonFromDatabaseUseCase;
 import com.example.pokemons.presentation.base.Presenter;
 
 import java.util.List;
@@ -22,18 +22,16 @@ public class FightPreviewPresenter extends Presenter<FightPreviewView> {
     private final GetEnemiesFromDatabaseUseCase getEnemiesFromDatabaseUseCase;
     private final CompositeDisposable disposable = new CompositeDisposable();
 
-    @Override
-    public void detachView() {
-        super.detachView();
-        disposable.clear();
-    }
-
     @Inject
     public FightPreviewPresenter(GetPokemonFromDatabaseUseCase getPokemonFromDatabaseUseCase,
                                  GetEnemiesFromDatabaseUseCase getEnemiesFromDatabaseUseCase
     ) {
         this.getPokemonFromDatabaseUseCase = getPokemonFromDatabaseUseCase;
         this.getEnemiesFromDatabaseUseCase = getEnemiesFromDatabaseUseCase;
+    }
+
+    public void clearDisposable() {
+        disposable.clear();
     }
 
     public void loadFighters() {

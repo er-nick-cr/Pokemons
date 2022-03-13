@@ -31,10 +31,10 @@
             android:name=".presentation.main_menu.MainMenuActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.menu.MenuActivity"
+            android:name=".presentation.menu.ChoosePokemonActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.welcome.WelcomeActivity"
+            android:name=".presentation.welcome.InsertNameActivity"
             android:exported="false" />
     </application>
 

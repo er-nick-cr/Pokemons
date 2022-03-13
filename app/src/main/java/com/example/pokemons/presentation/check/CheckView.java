@@ -5,7 +5,6 @@ import com.example.pokemons.domain.entity.User;
 
 public interface CheckView {
     void showError();
-    void moveToWelcomeScreen();
-    void moveToMenuScreen();
+    void moveToInsertNameScreen();
     void moveToMainMenuScreen();
 }

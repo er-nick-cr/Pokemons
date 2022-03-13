@@ -1,10 +1,9 @@
-package com.example.pokemons.domain.usecase;
+package com.example.pokemons.domain.usecase.pokemon;
 
 import androidx.annotation.NonNull;
 
 import com.example.pokemons.domain.entity.Pokemon;
 import com.example.pokemons.domain.repository.PokemonRepository;
-import com.example.pokemons.presentation.main_menu.MainMenuActivity;
 
 import java.util.List;
 

@@ -5,10 +5,10 @@ import android.content.Context;
 import com.example.pokemons.data.datasource.database.PokemonDatabase;
 import com.example.pokemons.data.repository.UserRepositoryImpl;
 import com.example.pokemons.domain.repository.UserRepository;
-import com.example.pokemons.domain.usecase.GetUserUseCase;
-import com.example.pokemons.domain.usecase.GetUserUseCaseImpl;
-import com.example.pokemons.domain.usecase.InsertUserUseCase;
-import com.example.pokemons.domain.usecase.InsertUserUseCaseImpl;
+import com.example.pokemons.domain.usecase.user.GetUserUseCase;
+import com.example.pokemons.domain.usecase.user.GetUserUseCaseImpl;
+import com.example.pokemons.domain.usecase.user.InsertUserUseCase;
+import com.example.pokemons.domain.usecase.user.InsertUserUseCaseImpl;
 
 import dagger.Binds;
 import dagger.Module;

@@ -5,7 +5,7 @@
     android:background="@color/backgroung_main_color"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.menu.MenuActivity">
+    tools:context=".presentation.menu.ChoosePokemonActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loader"
@@ -95,9 +95,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="130dp"
-        android:layout_marginBottom="130dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"

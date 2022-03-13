@@ -1,4 +1,4 @@
-package com.example.pokemons.domain.usecase;
+package com.example.pokemons.domain.usecase.user;
 
 import com.example.pokemons.domain.entity.User;
 

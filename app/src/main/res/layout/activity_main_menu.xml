@@ -141,7 +141,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/change_character_button"
+        android:id="@+id/change_account_button"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="?android:attr/selectableItemBackground"

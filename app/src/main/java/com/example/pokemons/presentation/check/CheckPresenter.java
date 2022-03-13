@@ -1,16 +1,12 @@
 package com.example.pokemons.presentation.check;
 
-import android.util.Log;
 import android.util.Pair;
 
 import com.example.pokemons.domain.entity.Pokemon;
 import com.example.pokemons.domain.entity.User;
-import com.example.pokemons.domain.usecase.GetPokemonFromDatabaseUseCase;
-import com.example.pokemons.domain.usecase.GetUserUseCase;
+import com.example.pokemons.domain.usecase.pokemon.GetPokemonFromDatabaseUseCase;
+import com.example.pokemons.domain.usecase.user.GetUserUseCase;
 import com.example.pokemons.presentation.base.Presenter;
-import com.example.pokemons.presentation.main_menu.MainMenuPresenter;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -26,16 +22,14 @@ public class CheckPresenter extends Presenter<CheckView> {
 
     private final CompositeDisposable disposable = new CompositeDisposable();
 
-    @Override
-    public void detachView() {
-        super.detachView();
-        disposable.clear();
-    }
-
     @Inject
     public CheckPresenter(GetUserUseCase getUserUseCase, GetPokemonFromDatabaseUseCase getPokemonFromDatabaseUseCase) {
         this.getUserUseCase = getUserUseCase;
         this.getPokemonFromDatabaseUseCase = getPokemonFromDatabaseUseCase;
+    }
+
+    public void clearDisposable() {
+        disposable.clear();
     }
 
     public void checkParams() {
@@ -46,9 +40,8 @@ public class CheckPresenter extends Presenter<CheckView> {
                 .subscribe(
                         (userPokemonPair -> view.moveToMainMenuScreen()),
                         (error -> view.showError()),
-                        (() -> view.moveToWelcomeScreen())
+                        (() -> view.moveToInsertNameScreen())
                 ));
-
     }
 
     private Maybe<User> loadUser() {

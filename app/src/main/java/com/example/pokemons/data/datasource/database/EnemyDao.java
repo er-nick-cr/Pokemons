@@ -20,4 +20,7 @@ public abstract class EnemyDao {
 
     @Query("SELECT * FROM EnemyDbModel")
     abstract public Maybe<List<EnemyDbModel>> getAllEnemy();
+
+    @Query("DELETE FROM EnemyDbModel WHERE id = :enemyId")
+    abstract public void deleteEnemy(int enemyId);
 }

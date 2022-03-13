@@ -1,9 +1,5 @@
 package com.example.pokemons.presentation.base;
 
-import android.view.View;
-
-import com.example.pokemons.presentation.menu.MenuView;
-
 public abstract class Presenter<View> {
 
     protected View view;
